@@ -1,6 +1,5 @@
 // If trees are identical / Same tree
 // https://leetcode.com/problems/same-tree/
-
 bool isSameTree(TreeNode* p, TreeNode* q) {
     if(p==NULL && q==NULL)
         return true;
@@ -12,9 +11,9 @@ bool isSameTree(TreeNode* p, TreeNode* q) {
         return false;
 }
 
+
 // Children Sum Parent
 // https://practice.geeksforgeeks.org/problems/children-sum-parent/1
-
 int isSumProperty(Node *root)
 {
     int sum = 0;
@@ -33,9 +32,9 @@ int isSumProperty(Node *root)
     return ((sum == root->data) && isSumProperty(root->left) && isSumProperty(root->right));
 }
 
+
 // K distance from root
 // https://practice.geeksforgeeks.org/problems/k-distance-from-root/1
-
 void KdistanceUtil(struct Node *root, int k) {
     if(root == NULL)
         return;
@@ -46,4 +45,57 @@ void KdistanceUtil(struct Node *root, int k) {
     KdistanceUtil(root->left, k-1);
     KdistanceUtil(root->right, k-1);
     return;
+}
+
+
+// Level order traversal
+// https://practice.geeksforgeeks.org/problems/level-order-traversal/1
+vector<int> levelOrder(Node* root)
+{
+    vector<int> v;
+    queue<Node*> q;
+    q.push(root);
+    while(q.empty() != 1) {
+        Node* temp = q.front();
+        q.pop();
+        v.push_back(temp->data);
+        if(temp->left)
+            q.push(temp->left);
+        if(temp->right)
+            q.push(temp->right);
+    }
+    return v;
+}
+
+//  Binary Tree Level Order Traversal
+// https://leetcode.com/problems/binary-tree-level-order-traversal/
+vector<vector<int>> levelOrder(TreeNode* root) {
+    vector<vector<int>> ans;
+    vector<int> v;
+    if(!root)
+        return ans;
+    queue<TreeNode*> q;
+    q.push(root);
+    q.push(NULL);
+    TreeNode* temp;
+    while(q.empty() != 1) {
+        temp = q.front();
+        if(temp == NULL) {
+            ans.push_back(v);
+            if(q.size() == 1)
+                break;
+            q.push(NULL);
+            v.clear();
+            q.pop();
+            continue;
+        }
+        else
+            v.push_back(temp->val);
+        q.pop();
+        if(temp->left)
+            q.push(temp->left);
+        if(temp->right)
+            q.push(temp->right);
+    }
+    return ans;
 }
