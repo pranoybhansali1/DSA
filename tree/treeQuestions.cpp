@@ -103,28 +103,28 @@ vector<vector<int>> levelOrder(TreeNode* root) {
 
 // 2nd method - counting nodes in queue at a time
 vector<vector<int>> levelOrder(TreeNode* root) {
-		vector<vector<int>> ans;
-		if(!root)
-			return ans;
-		queue<TreeNode*> q;
-		q.push(root);
-		TreeNode* temp;
-		while(q.empty() == 0) {
-			int n = q.size();
-			vector<int> v;
-			for(int i=0; i<n; i++) {
-				temp = q.front();
-				q.pop();
-				v.push_back(temp->val);
-				if(temp->left)
-					q.push(temp->left);
-				if(temp->right)
-					q.push(temp->right);
-			}
-			ans.push_back(v);
-			v.clear();
-		}
+	vector<vector<int>> ans;
+	if(!root)
 		return ans;
+	queue<TreeNode*> q;
+	q.push(root);
+	TreeNode* temp;
+	while(q.empty() == 0) {
+		int n = q.size();
+		vector<int> v;
+		for(int i=0; i<n; i++) {
+			temp = q.front();
+			q.pop();
+			v.push_back(temp->val);
+			if(temp->left)
+				q.push(temp->left);
+			if(temp->right)
+				q.push(temp->right);
+		}
+		ans.push_back(v);
+		v.clear();
+	}
+	return ans;
 }
 
 
@@ -134,7 +134,5 @@ int getSize(Node* root)
 {
     if(!root)
         return 0;
-    if(!root->left && !root->right)
-        return 1;
-    return getSize(root->left) + getSize(root->right) + 1;
+    return getSize(root->left) + 1 + getSize(root->right);
 }
