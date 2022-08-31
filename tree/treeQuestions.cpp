@@ -151,3 +151,37 @@ int findMin(Node *root)
             return INT_MAX;
     return min(root->data, min(findMin(root->left), findMin(root->right)));
 }
+
+//  Check for Balanced Tree 
+
+
+//  Left View of Binary Tree 
+
+
+//  Right View of Binary Tree 
+
+
+// Binary Tree to DLL
+// https://practice.geeksforgeeks.org/problems/binary-tree-to-dll/1
+void inorder(Node *root) {
+    if(root == NULL)
+        return;
+    inorder(root->left);
+    if(prev == NULL) {
+        head = root;
+        root->left = prev;
+        prev = root;
+    }
+    else {
+        prev->right = root;
+        root->left = prev;
+        prev = root;
+    }
+    inorder(root->right);
+}
+
+Node* bToDLL(Node *root)
+{
+    inorder(root);
+    return head;
+}
