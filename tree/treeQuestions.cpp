@@ -127,3 +127,14 @@ vector<vector<int>> levelOrder(TreeNode* root) {
 		return ans;
 }
 
+
+// Size of Binary Tree
+// https://practice.geeksforgeeks.org/problems/size-of-binary-tree/1
+int getSize(Node* root)
+{
+    if(!root)
+        return 0;
+    if(!root->left && !root->right)
+        return 1;
+    return getSize(root->left) + getSize(root->right) + 1;
+}
