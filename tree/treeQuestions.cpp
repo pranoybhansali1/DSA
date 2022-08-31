@@ -103,28 +103,28 @@ vector<vector<int>> levelOrder(TreeNode* root) {
 
 // 2nd method - counting nodes in queue at a time
 vector<vector<int>> levelOrder(TreeNode* root) {
-	vector<vector<int>> ans;
-	if(!root)
-		return ans;
-	queue<TreeNode*> q;
-	q.push(root);
-	TreeNode* temp;
-	while(q.empty() == 0) {
-		int n = q.size();
-		vector<int> v;
-		for(int i=0; i<n; i++) {
-			temp = q.front();
-			q.pop();
-			v.push_back(temp->val);
-			if(temp->left)
-				q.push(temp->left);
-			if(temp->right)
-				q.push(temp->right);
-		}
-		ans.push_back(v);
-		v.clear();
-	}
-	return ans;
+    vector<vector<int>> ans;
+    if(!root)
+        return ans;
+    queue<TreeNode*> q;
+    q.push(root);
+    TreeNode* temp;
+    while(q.empty() == 0) {
+        int n = q.size();
+        vector<int> v;
+        for(int i=0; i<n; i++) {
+            temp = q.front();
+            q.pop();
+            v.push_back(temp->val);
+            if(temp->left)
+                q.push(temp->left);
+            if(temp->right)
+                q.push(temp->right);
+        }
+        ans.push_back(v);
+        v.clear();
+    }
+    return ans;
 }
 
 
@@ -141,13 +141,13 @@ int getSize(Node* root)
 // https://practice.geeksforgeeks.org/problems/max-and-min-element-in-binary-tree/1
 int findMax(Node *root)
 {
-		if(!root)
-				return INT_MIN;
-		return max(root->data, max(findMax(root->left), findMax(root->right)));
+    if(!root)
+            return INT_MIN;
+    return max(root->data, max(findMax(root->left), findMax(root->right)));
 }
 int findMin(Node *root)
 {
-		if(!root)
-				return INT_MAX;
-		return min(root->data, min(findMin(root->left), findMin(root->right)));
+    if(!root)
+            return INT_MAX;
+    return min(root->data, min(findMin(root->left), findMin(root->right)));
 }
