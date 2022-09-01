@@ -185,3 +185,51 @@ Node* bToDLL(Node *root)
     inorder(root);
     return head;
 }
+
+
+// Binary Tree Right Side View
+// https://leetcode.com/problems/binary-tree-right-side-view/
+// 1st method - using level order traversal
+vector<int> rightSideView(TreeNode* root) {
+    vector<int> v;
+    if(!root) {
+        return v;
+    }
+    queue<TreeNode*> q;
+    q.push(root);
+    while(q.empty() == 0) {
+        int n = q.size();
+        TreeNode *temp;
+        for(int i=0; i<n; i++) {
+            temp = q.front();
+            q.pop();
+            if(i == n-1)
+                v.push_back(temp->val);
+            if(temp->left)
+                q.push(temp->left);
+            if(temp->right)
+                q.push(temp->right);
+        }
+    }
+    return v;
+}
+
+// 2nd method - using recursion and maxLevel variable
+int maxLevel = 0;
+vector<int> v;
+void rightSide(TreeNode* root, int level) {
+    if(!root) {
+        return;
+    }
+    if(maxLevel < level) {
+        v.push_back(root->val);
+        maxLevel = level;
+    }
+    rightSide(root->right, level+1);
+    rightSide(root->left, level+1);
+}
+
+vector<int> rightSideView(TreeNode* root) {
+    rightSide(root, 1);
+    return v;
+}
