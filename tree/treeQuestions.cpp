@@ -233,3 +233,6 @@ vector<int> rightSideView(TreeNode* root) {
     rightSide(root, 1);
     return v;
 }
+
+
+<iframe width="1515" height="544" src="https://www.youtube.com/embed/uo9Nf2nyvVw" title="Vertical Width of a Binary Tree | Tree Data Structure playlist C++ | Hello World | GeeksForGeeks" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
