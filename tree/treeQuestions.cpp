@@ -234,5 +234,22 @@ vector<int> rightSideView(TreeNode* root) {
     return v;
 }
 
+// Vertical Width of a Binary Tree
+// https://practice.geeksforgeeks.org/problems/vertical-width-of-a-binary-tree/1
+// Trick - https://youtu.be/uo9Nf2nyvVw?t=393
+int val = 0;
 
-<iframe width="1515" height="544" src="https://www.youtube.com/embed/uo9Nf2nyvVw" title="Vertical Width of a Binary Tree | Tree Data Structure playlist C++ | Hello World | GeeksForGeeks" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+void vWidth(Node *root, int val, unordered_set<int> &us) {
+    if(!root)
+        return;
+    us.insert(val);
+    vWidth(root->left, val-1, us);
+    vWidth(root->right, val+1, us);
+}
+
+int verticalWidth(Node* root)
+{
+    unordered_set<int> us;
+    vWidth(root, 0, us);
+    return us.size();
+}
