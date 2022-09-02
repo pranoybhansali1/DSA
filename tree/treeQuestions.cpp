@@ -312,3 +312,47 @@ void mirror(Node* root)
             q.push(curr->right);
     }
 }
+
+// Iterative in BFS:
+bool isSymmetric(TreeNode* root) {
+    if(!root) return true;
+    queue<nodepair> q;
+    q.push(make_pair(root->left, root->right));
+    while(!q.empty()){
+        nodepair p = q.front();
+        q.pop();
+        if(!p.first && !p.second) continue;
+        if(!p.first || !p.second) return false;
+        if(p.first->val != p.second->val) return false;
+        q.push(make_pair(p.first->left, p.second->right));
+        q.push(make_pair(p.first->right, p.second->left));
+    }
+    return true;
+}
+
+// Iterative in DFS:
+bool isSymmetric(TreeNode* root) {
+    if(!root) return true;
+    stack<TreeNode*> sl, sr;
+    sl.push(root);
+    sr.push(root);
+    TreeNode * lp = root->left, *rp = root->right;
+    while(lp || ! sl.empty() || rp || !sl.empty()){
+        if((!lp && rp) || (lp && !rp)) return false;
+        if(lp && rp){
+            if(lp->val != rp->val) return false;
+            sl.push(lp);
+            sr.push(rp);
+            lp = lp->left;
+            rp = rp->right;
+        }else{
+            lp = sl.top()->right;
+            rp = sr.top()->left;
+            sl.pop();
+            sr.pop();
+        }
+    }
+    return true;
+}
+
+
