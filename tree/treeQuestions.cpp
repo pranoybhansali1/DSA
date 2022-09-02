@@ -383,3 +383,26 @@ bool isSymmetric(TreeNode* root) {
 }
 
 
+//  Make Binary Tree From Linked List 
+// https://practice.geeksforgeeks.org/problems/make-binary-tree/1
+void convert(Node *head, TreeNode *&root) {
+    root = new TreeNode(head->data);
+    TreeNode *curr = root;
+    head = head->next;
+    queue<TreeNode*> q;
+    q.push(curr);
+    while(head) {
+        curr = q.front();
+        q.pop();
+        curr->left = new TreeNode(head->data);
+        head = head->next;
+        if(!head)
+            return;
+        curr->right = new TreeNode(head->data);
+        q.push(curr->left);
+        q.push(curr->right);
+        head = head->next;
+    }
+}
+
+
