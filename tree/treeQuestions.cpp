@@ -253,3 +253,62 @@ int verticalWidth(Node* root)
     vWidth(root, 0, us);
     return us.size();
 }
+
+
+// Mirror Tree
+// https://practice.geeksforgeeks.org/problems/mirror-tree/1
+void mirror(Node* root) {
+    if(!root)
+        return;
+    mirror(root->left);
+    mirror(root->right);
+    Node *temp = root->left;
+    root->left = root->right;
+    root->right = temp;
+}
+
+
+// Symmetric Tree
+// https://leetcode.com/problems/symmetric-tree/
+// 1st - Using recursion
+bool isSymm(TreeNode* root1, TreeNode* root2) {
+    if(!root1 && !root2)
+        return true;
+    else if(!root1 || !root2)
+        return false;
+    if(root1->val != root2->val)
+        return false;
+    return((root1->val == root2->val) && isSymm(root1->left, root2->right) && isSymm(root1->right, root2->left));
+}
+
+bool isSymmetric(TreeNode* root) {
+    return isSymm(root->left, root->right);
+}
+
+// 2nd - Using level order traversal - queue
+void mirror(Node* root)
+{
+    if (root == NULL)
+        return;
+  
+    queue<Node*> q;
+    q.push(root);
+  
+    // Do BFS. While doing BFS, keep swapping
+    // left and right children
+    while (!q.empty())
+    {
+        // pop top node from queue
+        Node* curr = q.front();
+        q.pop();
+  
+        // swap left child with right child
+        swap(curr->left, curr->right);
+  
+        // push left and right children
+        if (curr->left)
+            q.push(curr->left);
+        if (curr->right)
+            q.push(curr->right);
+    }
+}
