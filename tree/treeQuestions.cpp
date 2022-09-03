@@ -406,3 +406,32 @@ void convert(Node *head, TreeNode *&root) {
 }
 
 
+// Construct Binary Tree from Preorder and Inorder Traversal
+// https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
+int idx = 0;
+TreeNode* tree(vector<int>& pre, vector<int>& in, int is, int ie) {
+    if(is > ie)
+        return NULL;
+
+    TreeNode *root = new TreeNode(pre[idx++]);
+    int inIdx = 0;
+    for(int i=is; i<=ie; i++) {
+        if(root->val == in[i]) {
+            inIdx = i;
+            break;
+        }
+    }
+    root->left = tree(pre,in,is,inIdx-1);
+    root->right = tree(pre,in,inIdx+1,ie);
+    return root;
+}
+
+TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+    int n = inorder.size();
+    return tree(preorder, inorder, 0, n-1);
+}
+
+
+// Level order traversal in spiral form
+// https://practice.geeksforgeeks.org/problems/level-order-traversal-in-spiral-form/1/
+/* Solution - https://www.geeksforgeeks.org/level-order-traversal-in-spiral-form/ */
