@@ -67,6 +67,7 @@ vector<int> levelOrder(Node* root)
     return v;
 }
 
+
 //  Binary Tree Level Order Traversal
 // https://leetcode.com/problems/binary-tree-level-order-traversal/
 // 1st method - Using NULL pointer
@@ -153,6 +154,7 @@ int findMin(Node *root)
 }
 
 //  Check for Balanced Tree 
+// 1st app -
 class Solution {
     int balance(TreeNode *root) {
         if(!root)
@@ -176,40 +178,17 @@ public:
     }
 };
 
+// 2nd app -
+bool isBalanced(TreeNode* root) {
+    if(root == NULL)return true;
+    return isBalanced(root->left) && isBalanced(root->right) && abs(height(root->left) - height(root->right)) <= 1;
+}
+
 
 // Left View of Binary Tree 
 // NB
 
 // Right View of Binary Tree 
-
-
-// Binary Tree to DLL
-// https://practice.geeksforgeeks.org/problems/binary-tree-to-dll/1
-void inorder(Node *root) {
-    if(root == NULL)
-        return;
-    inorder(root->left);
-    if(prev == NULL) {
-        head = root;
-        root->left = prev;
-        prev = root;
-    }
-    else {
-        prev->right = root;
-        root->left = prev;
-        prev = root;
-    }
-    inorder(root->right);
-}
-
-Node* bToDLL(Node *root)
-{
-    inorder(root);
-    return head;
-}
-
-
-// Binary Tree Right Side View
 // https://leetcode.com/problems/binary-tree-right-side-view/
 // 1st method - using level order traversal
 vector<int> rightSideView(TreeNode* root) {
@@ -255,6 +234,34 @@ vector<int> rightSideView(TreeNode* root) {
     rightSide(root, 1);
     return v;
 }
+
+
+// Binary Tree to DLL
+// https://practice.geeksforgeeks.org/problems/binary-tree-to-dll/1
+Node *head = NULL, *prev = NULL;
+void inorder(Node *root) {
+    if(root == NULL)
+        return;
+    inorder(root->left);
+    if(prev == NULL) {
+        head = root;
+        root->left = prev;
+        prev = root;
+    }
+    else {
+        prev->right = root;
+        root->left = prev;
+        prev = root;
+    }
+    inorder(root->right);
+}
+
+Node* bToDLL(Node *root)
+{
+    inorder(root);
+    return head;
+}
+
 
 // Vertical Width of a Binary Tree
 // https://practice.geeksforgeeks.org/problems/vertical-width-of-a-binary-tree/1
@@ -379,7 +386,7 @@ bool isSymmetric(TreeNode* root) {
     return true;
 }
 
-// Iterative in DFS:
+// 3rd - Iterative in DFS:
 bool isSymmetric(TreeNode* root) {
     if(!root) return true;
     stack<TreeNode*> sl, sr;
@@ -451,6 +458,24 @@ TreeNode* tree(vector<int>& pre, vector<int>& in, int is, int ie) {
 TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
     int n = inorder.size();
     return tree(preorder, inorder, 0, n-1);
+}
+
+
+// Diameter of a Binary Tree
+// https://practice.geeksforgeeks.org/problems/diameter-of-binary-tree/1
+int maxH = 0;
+int diameterUtil(Node *root) {
+    if(!root)
+        return 0;
+    int lh = diameterUtil(root->left);
+    int rh = diameterUtil(root->right);
+    maxH = max(maxH, (1+lh+rh));
+    return (max(lh, rh) + 1);
+}
+int diameter(Node* root) {
+    maxH = 0;
+    diameterUtil(root);
+    return maxH;
 }
 
 
