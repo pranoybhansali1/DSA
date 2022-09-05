@@ -153,12 +153,34 @@ int findMin(Node *root)
 }
 
 //  Check for Balanced Tree 
+class Solution {
+    int balance(TreeNode *root) {
+        if(!root)
+            return 0;
+        int lh = balance(root->left);
+        if(lh == -1)    return -1;
+        int rh = balance(root->right);
+        if(rh == -1)    return -1;
+        if(abs(lh-rh) > 1)
+            return -1;
+        else
+            return (max(lh, rh) + 1);
+    }
+public:
+    bool isBalanced(TreeNode* root) {
+        if(!root)
+            return 1;
+        if(balance(root) == -1)
+            return 0;
+        return 1;
+    }
+};
 
 
-//  Left View of Binary Tree 
+// Left View of Binary Tree 
+// NB
 
-
-//  Right View of Binary Tree 
+// Right View of Binary Tree 
 
 
 // Binary Tree to DLL
